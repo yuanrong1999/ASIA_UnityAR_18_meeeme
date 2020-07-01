@@ -8,6 +8,7 @@ public class TapToPlaceObject : MonoBehaviour
     //[RequireComponent(typeof(ARRaycastManager))]
     [Header("想放置的物件")]
     public GameObject tapObject;
+
     /// <summary>
     /// AR射線碰撞管理器
     /// </summary>
@@ -26,6 +27,11 @@ public class TapToPlaceObject : MonoBehaviour
         arRaycast = GetComponent<ARRaycastManager>(); //取得AR設線管理元件
     }
 
+    private void Update()
+    {
+        TapObject();
+    }
+
     /// <summary>
     /// 點擊放置物件
     /// </summary>
@@ -36,7 +42,7 @@ public class TapToPlaceObject : MonoBehaviour
         {
             mousePos = Input.mousePosition; //儲存點擊座標
 
-            if(arRaycast.Raycast(mousePos,hits,TrackableType.PlaneWithinPolygon)) //AR射線碰撞
+            if(arRaycast.Raycast(mousePos, hits,TrackableType.PlaneWithinPolygon)) //AR射線碰撞
             {
                 //生成物件在點擊座標
                 Pose pose = hits[0].pose;
